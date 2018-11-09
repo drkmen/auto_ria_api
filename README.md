@@ -1,8 +1,8 @@
-# AutoRiaApi
+# Auto Ria Api
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/auto_ria_api`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem provides integration with [https://auto.ria.com/](https://auto.ria.com/)
 
-TODO: Delete this and the text above, and describe your gem
+#### Please NOTE that this is very early version and not all endpoints are implemented.
 
 ## Installation
 
@@ -21,18 +21,41 @@ Or install it yourself as:
     $ gem install auto_ria_api
 
 ## Usage
+First of all you need an api_key which you can get at [https://developers.ria.com](https://developers.ria.com)
+```ruby
+# create an instance 
+@client = AutoRiaApi::Base.new(api_key: ENV['AUTO_RIA_API_KEY'])
 
-TODO: Write usage instructions here
+# Methods:
+@clien.types
+@clien.carcasses(type, grouped: false, all: false)
+@clien.marks(carcasse)
+@clien.models(carcasse, mark, grouped: false, all: false)
+@clien.regions
+@clien.cities(region)
+@clien.gearboxes(carcasse)
+@clien.fuels
+@clien.colors
+@clien.options(carcasse)
+# all method arguments assuming ID (Integer)
 
-## Development
+```
+For more detailed documentation follows: 
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+[https://github.com/ria-com/auto-ria-rest-api/tree/master/AUTO_RIA_API](https://github.com/ria-com/auto-ria-rest-api/tree/master/AUTO_RIA_API)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+[https://api-docs-v2.readthedocs.io/ru/latest/auto_ria/index.html](https://api-docs-v2.readthedocs.io/ru/latest/auto_ria/index.html)
+
+## TODO:
+1. Get rid of ::Base namespace. I.e instance should be created directly with `AutoRiaApi.new` 
+1. Implement `search` 
+1. Implement `average_price` 
+1. Implement `info`  endpoints
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/auto_ria_api.
+Bug reports and pull requests are welcome on GitHub at https://github.com/drkmen/auto_ria_api. 
+Help is appreciated Feel free to fork and make a difference!
 
 ## License
 
