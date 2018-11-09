@@ -12,3 +12,8 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+RSpec.shared_examples 'success responses' do
+  it { is_expected.to be_instance_of Array }
+  it { is_expected.to_not be_empty }
+end
