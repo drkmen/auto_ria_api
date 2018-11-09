@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['drkmen@rambler.ru']
 
   spec.summary       = 'AUTO RIA rest api'
-  spec.description   = 'Ruby implementation of AUTO RIA API'
+  spec.description   = 'Integration of Auto.Ria API for Ruby'
   spec.homepage      = 'https://github.com/drkmen/auto_ria_api'
   spec.license       = 'MIT'
 
