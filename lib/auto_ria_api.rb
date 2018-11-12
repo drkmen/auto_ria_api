@@ -14,19 +14,19 @@ module AutoRiaApi
       request '/auto/categories'
     end
 
-    def carcasses(type, grouped: false, all: false)
+    def carcasses(type:, grouped: false, all: false)
       raise ArgumentError, 'Type should not be empty.' if blank?(type)
       return request '/auto/bodystyles' if all
       group = '_group' if grouped
       request "/auto/categories/#{type}/bodystyles/#{group}"
     end
 
-    def marks(carcasse)
+    def marks(carcasse:)
       raise ArgumentError, 'Carcass should not be empty.' if blank?(carcasse)
       request "/auto/categories/#{carcasse}/marks"
     end
 
-    def models(carcasse, mark, grouped: false, all: false)
+    def models(carcasse:, mark:, grouped: false, all: false)
       raise ArgumentError, 'Carcass should not be empty.' if blank?(carcasse)
       raise ArgumentError, 'Mark should not be empty.' if blank?(mark)
       return request '/auto/models' if all
@@ -38,12 +38,12 @@ module AutoRiaApi
       request '/auto/states'
     end
 
-    def cities(region)
+    def cities(region:)
       raise ArgumentError, 'Region should not be empty.' if blank?(region)
       request "/auto/states/#{region}/cities"
     end
 
-    def gearboxes(carcasse)
+    def gearboxes(carcasse:)
       raise ArgumentError, 'Carcasse should not be empty.' if blank?(carcasse)
       request "/auto/categories/#{carcasse}/gearboxes"
     end
@@ -60,7 +60,7 @@ module AutoRiaApi
       request '/auto/colors'
     end
 
-    def options(carcasse)
+    def options(carcasse:)
       raise ArgumentError, 'Carcasse should not be empty.' if blank?(carcasse)
       request "/auto/categories/#{carcasse}/auto_options"
     end
@@ -73,13 +73,14 @@ module AutoRiaApi
       raise 'Not implemented'
     end
 
-    def info(*args)
-      raise 'Not implemented'
+    def info(car_id:)
+      raise ArgumentError, 'car_id should not be empty.' if blank?(car_id)
+      request '/auto/info', auto_id: car_id
     end
 
     private
 
-    def request(url, method = :get_response, params = {})
+    def request(url, params = {}, method = :get_response)
       uri = URI(@default_url + url)
       uri.query = URI.encode_www_form(params.merge(api_key: @api_key))
       response = Net::HTTP.public_send(method, uri)

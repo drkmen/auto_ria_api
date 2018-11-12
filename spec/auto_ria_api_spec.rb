@@ -31,22 +31,22 @@ RSpec.describe AutoRiaApi::Base do
     describe '#carcasses' do
       it 'should raise ArgumentError unless :type provided' do
         expect do
-          api.carcasses nil
+          api.carcasses type: nil
         end.to raise_error ArgumentError
       end
 
       context 'success grouped response' do
-        subject { api.carcasses 2, grouped: true }
+        subject { api.carcasses type: 2, grouped: true }
         it_behaves_like 'success responses'
       end
 
       context 'success response' do
-        subject { api.carcasses 1 }
+        subject { api.carcasses type: 1 }
         it_behaves_like 'success responses'
       end
 
       context 'success ALL response' do
-        subject { api.carcasses 1, all: true }
+        subject { api.carcasses type: 1, all: true }
         it_behaves_like 'success responses'
       end
     end
@@ -54,33 +54,33 @@ RSpec.describe AutoRiaApi::Base do
     describe '#marks' do
       it 'should raise ArgumentError unless :carcasse provided' do
         expect do
-          api.marks nil
+          api.marks carcasse: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.marks 1 }
+      subject { api.marks carcasse: 1 }
       it_behaves_like 'success responses'
     end
 
     describe '#models' do
-      it 'should raise ArgumentError unless :carcasse provided' do
+      it 'should raise ArgumentError unless :carcasse || :mark provided' do
         expect do
-          api.models nil, nil
+          api.models carcasse: nil, mark: nil
         end.to raise_error ArgumentError
       end
 
       context 'success grouped response' do
-        subject { api.models 2, 9, grouped: true }
+        subject { api.models carcasse: 2, mark: 9, grouped: true }
         it_behaves_like 'success responses'
       end
 
       context 'success response' do
-        subject { api.models 2, 9 }
+        subject { api.models carcasse: 2, mark: 9 }
         it_behaves_like 'success responses'
       end
 
       context 'success ALL response' do
-        subject { api.models 2, 9, all: true }
+        subject { api.models carcasse: 2, mark: 9, all: true }
         it_behaves_like 'success responses'
       end
     end
@@ -93,22 +93,22 @@ RSpec.describe AutoRiaApi::Base do
     describe '#cities' do
       it 'should raise ArgumentError unless :region provided' do
         expect do
-          api.cities nil
+          api.cities region: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.cities 1 }
+      subject { api.cities region: 1 }
       it_behaves_like 'success responses'
     end
 
     describe '#gearboxes' do
       it 'should raise ArgumentError unless :carcasse provided' do
         expect do
-          api.gearboxes nil
+          api.gearboxes carcasse: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.gearboxes 1 }
+      subject { api.gearboxes carcasse: 1 }
       it_behaves_like 'success responses'
     end
 
@@ -125,12 +125,23 @@ RSpec.describe AutoRiaApi::Base do
     describe '#options' do
       it 'should raise ArgumentError unless :carcasse provided' do
         expect do
-          api.options nil
+          api.options carcasse: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.options 1 }
+      subject { api.options carcasse: 1 }
       it_behaves_like 'success responses'
+    end
+
+    describe '#info' do
+      it 'should raise ArgumentError unless :car_id provided' do
+        expect do
+          api.info car_id: nil
+        end.to raise_error ArgumentError
+      end
+
+      subject { api.info car_id: '23120045' }
+      it_behaves_like 'success hash responses'
     end
 
   end

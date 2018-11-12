@@ -57,6 +57,10 @@ For more detailed documentation follows:
 Bug reports and pull requests are welcome on GitHub at https://github.com/drkmen/auto_ria_api. 
 Help is appreciated Feel free to fork and make a difference!
 
+## Tests
+
+Provide `ENV['AUTO_RIA_API_KEY']` in your `.env` file or add it to system env: `export AUTO_RIA_API_KEY=your_key` and run `rspec` 
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
