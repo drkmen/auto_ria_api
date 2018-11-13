@@ -123,13 +123,13 @@ RSpec.describe AutoRiaApi::Base do
     end
 
     describe '#options' do
-      it 'should raise ArgumentError unless :carcasse provided' do
+      it 'should raise ArgumentError unless :type provided' do
         expect do
-          api.options carcasse: nil
+          api.options type: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.options carcasse: 1 }
+      subject { api.options type: 1 }
       it_behaves_like 'success responses'
     end
 

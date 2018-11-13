@@ -36,7 +36,7 @@ First of all you need an api_key which you can get at [https://developers.ria.co
 @client.gearboxes(carcasse:)
 @client.fuels
 @client.colors
-@client.options(carcasse:)
+@client.options(type:)
 
 @client.info(car_id:)
 # all method arguments assuming ID (Integer)

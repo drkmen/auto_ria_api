@@ -60,9 +60,9 @@ module AutoRiaApi
       request '/auto/colors'
     end
 
-    def options(carcasse:)
-      raise ArgumentError, 'Carcasse should not be empty.' if blank?(carcasse)
-      request "/auto/categories/#{carcasse}/auto_options"
+    def options(type:)
+      raise ArgumentError, 'Type should not be empty.' if blank?(type)
+      request "/auto/categories/#{type}/auto_options"
     end
 
     def average_price(*args)
