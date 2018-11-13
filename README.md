@@ -27,16 +27,18 @@ First of all you need an api_key which you can get at [https://developers.ria.co
 @client = AutoRiaApi::Base.new(api_key: ENV['AUTO_RIA_API_KEY'])
 
 # Methods:
-@clien.types
-@clien.carcasses(type, grouped: false, all: false)
-@clien.marks(carcasse)
-@clien.models(carcasse, mark, grouped: false, all: false)
-@clien.regions
-@clien.cities(region)
-@clien.gearboxes(carcasse)
-@clien.fuels
-@clien.colors
-@clien.options(carcasse)
+@client.types
+@client.carcasses(type:, grouped: false, all: false)
+@client.marks(carcasse:)
+@client.models(carcasse:, mark, grouped: false, all: false)
+@client.regions
+@client.cities(region:)
+@client.gearboxes(carcasse:)
+@client.fuels
+@client.colors
+@client.options(carcasse:)
+
+@client.info(car_id:)
 # all method arguments assuming ID (Integer)
 
 ```
