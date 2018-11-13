@@ -144,5 +144,16 @@ RSpec.describe AutoRiaApi::Base do
       it_behaves_like 'success hash responses'
     end
 
+    describe '#photos' do
+      it 'should raise ArgumentError unless :car_id provided' do
+        expect do
+          api.photos car_id: nil
+        end.to raise_error ArgumentError
+      end
+
+      subject { api.photos car_id: '23120045' }
+      it_behaves_like 'success hash responses'
+    end
+
   end
 end

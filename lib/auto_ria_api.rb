@@ -78,6 +78,11 @@ module AutoRiaApi
       request '/auto/info', auto_id: car_id
     end
 
+    def photos(car_id:)
+      raise ArgumentError, 'car_id should not be empty.' if blank?(car_id)
+      request "/auto/fotos/#{car_id}", auto_id: car_id
+    end
+
     private
 
     def request(url, params = {}, method = :get_response)

@@ -14,7 +14,7 @@ RSpec.configure do |config|
 end
 
 RSpec.shared_examples 'success responses' do
-  it { is_expected.to be_instance_of Array || Hash }
+  it { is_expected.to be_instance_of Array }
   it { is_expected.to_not be_empty }
 end
 
