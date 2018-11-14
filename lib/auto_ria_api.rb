@@ -21,17 +21,17 @@ module AutoRiaApi
       request "/auto/categories/#{type}/bodystyles/#{group}"
     end
 
-    def marks(carcasse:)
-      raise ArgumentError, 'Carcass should not be empty.' if blank?(carcasse)
-      request "/auto/categories/#{carcasse}/marks"
+    def marks(type:)
+      raise ArgumentError, 'Type should not be empty.' if blank?(type)
+      request "/auto/categories/#{type}/marks"
     end
 
-    def models(carcasse:, mark:, grouped: false, all: false)
-      raise ArgumentError, 'Carcass should not be empty.' if blank?(carcasse)
+    def models(type:, mark:, grouped: false, all: false)
+      raise ArgumentError, 'Type should not be empty.' if blank?(type)
       raise ArgumentError, 'Mark should not be empty.' if blank?(mark)
       return request '/auto/models' if all
       group = '_group' if grouped
-      request "/auto/categories/#{carcasse}/marks/#{mark}/models/#{group}"
+      request "/auto/categories/#{type}/marks/#{mark}/models/#{group}"
     end
 
     def regions
@@ -43,9 +43,9 @@ module AutoRiaApi
       request "/auto/states/#{region}/cities"
     end
 
-    def gearboxes(carcasse:)
-      raise ArgumentError, 'Carcasse should not be empty.' if blank?(carcasse)
-      request "/auto/categories/#{carcasse}/gearboxes"
+    def gearboxes(type:)
+      raise ArgumentError, 'Type should not be empty.' if blank?(type)
+      request "/auto/categories/#{type}/gearboxes"
     end
 
     def driver_types
@@ -94,10 +94,9 @@ module AutoRiaApi
 
     def parsed(response)
       res = JSON.parse(response.body)
+      raise Error, res.dig('error') if res.is_a?(Hash) && res.has_key?('error')
       yield res if block_given?
       res
-    rescue => e
-      e
     end
 
     def blank?(arg)

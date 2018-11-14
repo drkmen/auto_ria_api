@@ -11,6 +11,13 @@ RSpec.describe AutoRiaApi::Base do
     end.to raise_error ArgumentError
   end
 
+  it 'should raise error if respond has error' do
+    failed_resp = double(body: { error: { message: 'Limit reached' }}.to_json)
+    expect do
+      api.send(:parsed, failed_resp)
+    end.to raise_error AutoRiaApi::Error
+  end
+
   describe 'endpoints' do
     context 'endpoint methods should be implemented' do
       endpoints = %i[types carcasses marks models regions gearboxes driver_types
@@ -52,35 +59,35 @@ RSpec.describe AutoRiaApi::Base do
     end
 
     describe '#marks' do
-      it 'should raise ArgumentError unless :carcasse provided' do
+      it 'should raise ArgumentError unless :type provided' do
         expect do
-          api.marks carcasse: nil
+          api.marks type: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.marks carcasse: 1 }
+      subject { api.marks type: 1 }
       it_behaves_like 'success responses'
     end
 
     describe '#models' do
-      it 'should raise ArgumentError unless :carcasse || :mark provided' do
+      it 'should raise ArgumentError unless :type || :mark provided' do
         expect do
-          api.models carcasse: nil, mark: nil
+          api.models type: nil, mark: nil
         end.to raise_error ArgumentError
       end
 
       context 'success grouped response' do
-        subject { api.models carcasse: 2, mark: 9, grouped: true }
+        subject { api.models type: 2, mark: 9, grouped: true }
         it_behaves_like 'success responses'
       end
 
       context 'success response' do
-        subject { api.models carcasse: 2, mark: 9 }
+        subject { api.models type: 2, mark: 9 }
         it_behaves_like 'success responses'
       end
 
       context 'success ALL response' do
-        subject { api.models carcasse: 2, mark: 9, all: true }
+        subject { api.models type: 2, mark: 9, all: true }
         it_behaves_like 'success responses'
       end
     end
@@ -102,13 +109,13 @@ RSpec.describe AutoRiaApi::Base do
     end
 
     describe '#gearboxes' do
-      it 'should raise ArgumentError unless :carcasse provided' do
+      it 'should raise ArgumentError unless :type provided' do
         expect do
-          api.gearboxes carcasse: nil
+          api.gearboxes type: nil
         end.to raise_error ArgumentError
       end
 
-      subject { api.gearboxes carcasse: 1 }
+      subject { api.gearboxes type: 1 }
       it_behaves_like 'success responses'
     end
 
