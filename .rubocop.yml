@@ -1,0 +1,58 @@
+#inherit_from: .rubocop_todo.yml
+AllCops:
+  TargetRubyVersion: '2.5'
+  DisplayCopNames: true
+  Exclude:
+    - Gemfile
+    - bin/*
+    - config/**/*
+    - config/application.rb
+    - db/**/*
+    - node_modules/**/*
+    - vendor/engines/*/bin/*
+    - vendor/engines/*/config/*
+    - vendor/engines/*/*.gemspec
+
+Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 50
+  Exclude:
+    - lib/tasks/*.rake
+    - spec/lib/tl_lincoln/factories/*
+
+Metrics/AbcSize:
+  Max: 30
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - spec/**/*
+    - lib/tasks/*.rake
+    - lib/tl_lincoln/spec/**/*
+    - config/routes.rb
+    - config/environments/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ParameterLists:
+  Max: 10
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockComments:
+  Exclude:
+    - spec/spec_helper.rb
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - !ruby/regexp /.xml.builder$/
