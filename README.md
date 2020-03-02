@@ -61,7 +61,7 @@ Help is appreciated Feel free to fork and make a difference!
 
 ## Tests
 
-Provide `ENV['AUTO_RIA_API_KEY']` in your `.env` file or add it to system env: `export AUTO_RIA_API_KEY=your_key` and run `rspec` 
+run `rspec` 
 
 ## License
 
