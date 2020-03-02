@@ -28,9 +28,9 @@ First of all you need an api_key which you can get at [https://developers.ria.co
 
 # Methods:
 @client.types
-@client.carcasses(type:, grouped: false, all: false)
+@client.carcasses(type:, options: { grouped: false, all: false })
 @client.marks(type:)
-@client.models(type:, mark, grouped: false, all: false)
+@client.models(type:, mark, options: { grouped: false, all: false })
 @client.regions
 @client.cities(region:)
 @client.gearboxes(type:)
