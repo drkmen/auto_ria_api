@@ -253,7 +253,25 @@ RSpec.describe AutoRiaApi::Base do
     end
 
     describe '#driver_types' do
-      it 'fetch driver_types'
+      let(:path) { "/auto/categories/#{type}/driverTypes" }
+      let(:type) { 'type' }
+
+      subject { client.driver_types type: type }
+      after { |example| subject unless example.metadata[:skip_after] }
+
+      it 'fetch driver_types' do
+        expect(http_client).to receive(:get_response).with(request_uri).and_return(stubbed_response)
+      end
+
+      it { is_expected.to eq parsed_response }
+
+      context 'when `type` is missing', :skip_after do
+        let(:type) { nil }
+
+        it 'raises an error' do
+          expect { subject }.to raise_error ArgumentError, '`type` should not be empty'
+        end
+      end
     end
 
     describe '#fuels' do
