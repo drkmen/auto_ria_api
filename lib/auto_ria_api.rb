@@ -79,10 +79,8 @@ module AutoRiaApi
       request "/auto/categories/#{type}/auto_options"
     end
 
-    def average_price(*args)
-      # raise NotImplementedError
-      # TODO real data
-      request "/auto/average_price", { marka_id: 9, model_id: 31612, gear_id: 1, gear_id: 2 }
+    def average_price(params)
+      request "/auto/average_price", params
     end
 
     def search(*args)
