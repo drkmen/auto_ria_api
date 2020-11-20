@@ -59,8 +59,10 @@ module AutoRiaApi
       request "/auto/categories/#{type}/gearboxes"
     end
 
-    def driver_types
-      raise NotImplementedError
+    def driver_types(type:)
+      raise ArgumentError, '`type` should not be empty' if blank?(type)
+
+      request "/auto/categories/#{type}/driverTypes"
     end
 
     def fuels
@@ -77,8 +79,8 @@ module AutoRiaApi
       request "/auto/categories/#{type}/auto_options"
     end
 
-    def average_price(*args)
-      raise NotImplementedError
+    def average_price(params)
+      request "/auto/average_price", params
     end
 
     def search(*args)

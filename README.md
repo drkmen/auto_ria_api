@@ -34,6 +34,7 @@ First of all you need an api_key which you can get at [https://developers.ria.co
 @client.regions
 @client.cities(region:)
 @client.gearboxes(type:)
+@client.driver_types(type:)
 @client.fuels
 @client.colors
 @client.options(type:)
